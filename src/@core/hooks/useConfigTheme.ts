@@ -4,7 +4,10 @@ import { Platform, useColorScheme } from 'react-native';
 export interface ConfigEntity {
   primary: string;
   secondary: string;
+  gradientBlue: (string | number)[];
+  gradientViolet: (string | number)[];
   backgroundScreens: string;
+  backgroundHeaders: string;
   textLight: string;
   textDark: string;
   textPrimary: string;
@@ -34,7 +37,10 @@ export default () => {
   const [configTheme, setConfigTheme] = useState<ConfigEntity>({
     primary: '#7000AD',
     secondary: '#F25FBB',
+    gradientBlue: ["#00DCEC","#00B7D5"],
+    gradientViolet: ["#8D24C4","#500F71"],
     backgroundScreens: '#f2f2f4',
+    backgroundHeaders: '#202020',
     textLight: 'white',
     textDark: 'black',
     textPrimary: '#000000',

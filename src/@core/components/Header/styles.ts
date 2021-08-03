@@ -1,12 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar, Platform } from 'react-native';
 
 import { ConfigEntity } from '@hooks/useConfigTheme';
 
-export default (props: ConfigEntity) => {
+export const useStyles = (props: ConfigEntity) => {
   return StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: props.backgroundScreens,
-    }
+    statusBar: {
+      height: Platform.OS === 'ios' ? '5%' : StatusBar.currentHeight
+    },    
+    title: {
+      color: props.textLight,
+      fontSize: 20,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      // lineHeight: 23.44
+    },
+    description: {
+      paddingHorizontal: 20,
+      color: props.textLight,
+      fontSize: 14,
+      textAlign: 'center',
+      // lineHeight: 23.44
+    },
   })
 };
