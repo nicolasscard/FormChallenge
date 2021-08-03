@@ -4,17 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import useConfigTheme from '@hooks/useConfigTheme';
 import useStyles from './styles';
+import { Props } from '@navigation/stack.navigation';
+import { Header, Card } from '@components/index';
 
-import { Props } from '@navigation/stack.navigation'
-
-const Home: React.FC<Props> = () => {
+const CreateAccount: React.FC<Props> = () => {
   const { configTheme } = useConfigTheme();
   const styles = useStyles(configTheme);
   
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Home</Text>
+      <Text>CreateAccount</Text>
       
     </SafeAreaView>
   )
@@ -23,4 +23,4 @@ const Home: React.FC<Props> = () => {
 
 }
 
-export default Home;
+export default CreateAccount;

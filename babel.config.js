@@ -11,7 +11,6 @@ module.exports = {
           '@hooks': './src/@core/hooks',
           '@utils': './src/@core/utils',
           '@screens': './src/app/screens',
-          '@presenter': './src/@core/presenter',
           '@navigation': './src/app/navigation',
           '@components': './src/@core/components',
           '@nativeModules': './src/@core/nativeModules',

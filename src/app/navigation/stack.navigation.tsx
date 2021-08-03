@@ -3,7 +3,7 @@ import { enableScreens } from 'react-native-screens';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
-import Home from '@screens/Home/Home';
+import CreateAccount from '@screens/CreateAccount/CreateAccount';
 
 enableScreens();
 
@@ -12,7 +12,7 @@ enableScreens();
  * A union type with undefined (e.g. SomeType | undefined) means that params are optional.
  */
  type RootStackParamList = {
-  Home: undefined
+  CreateAccount: undefined
 };
 
 // Creatte a generic Props for all screen
@@ -27,12 +27,12 @@ export type Props = {
 function StackNavigation() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="CreateAccount"
       screenOptions={{
         headerShown: false
       }}
     >
-      <Stack.Screen name="Home" component={Home} />     
+      <Stack.Screen name="CreateAccount" component={CreateAccount} />     
 
     </Stack.Navigator>
   );

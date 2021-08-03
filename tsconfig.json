@@ -43,7 +43,6 @@
       "@hooks/*": ["@core/hooks/*"],
       "@utils/*": ["@core/utils/*"],
       "@screens/*": ["app/screens/*"],
-      "@presenter/*": ["@core/presenter/*"],
       "@navigation/*": ["app/navigation/*"],
       "@components/*": ["@core/components/*"],
       "@nativeModules/*": ["@core/nativeModules/*"],
