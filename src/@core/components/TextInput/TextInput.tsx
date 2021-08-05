@@ -26,7 +26,7 @@ const TextInput: React.FC<Props> = (Props) => {
       style={styles.textInput}
       theme={{ 
         colors: { 
-          text: configTheme.textInputText, 
+          text: configTheme.primary, 
           primary: configTheme.textSecondary, 
           placeholder: configTheme.textInputTitle,
           error: configTheme.error

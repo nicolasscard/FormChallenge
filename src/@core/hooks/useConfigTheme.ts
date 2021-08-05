@@ -18,6 +18,7 @@ export interface ConfigEntity {
   textInputText: string;
   card: string;
   error: string;
+  primaryButton: string;
   /* fontLight: string;
   fontRegular: string;
   fontBold: string; */
@@ -36,7 +37,7 @@ export default () => {
   const [mode, setMode] = useState<string | null | undefined>(isDarkMode)
 
   const [configTheme, setConfigTheme] = useState<ConfigEntity>({
-    primary: '#7000AD',
+    primary: '#17BFDD', 
     secondary: '#F25FBB',
     gradientBlue: ["#00DCEC","#00B7D5"],
     gradientViolet: ["#8D24C4","#500F71"],
@@ -52,6 +53,7 @@ export default () => {
     textInputText: '#17BFDD',
     card: 'white',
     error: '#FF0000',
+    primaryButton: '#5FBA20',
     /* fontLight: Platform.OS === 'ios' ? 'SonnyGothic-UltraLight' : 'W Foundry - Sonny Gothic Ultra Light',
     fontRegular: Platform.OS === 'ios' ? 'SonnyGothic-Regular' : 'W Foundry - Sonny Gothic Regular',
     fontBold: Platform.OS === 'ios' ? 'SonnyGothic-Bold' : 'W Foundry - Sonny Gothic Bold', */

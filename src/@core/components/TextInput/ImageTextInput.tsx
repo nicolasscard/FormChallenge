@@ -20,10 +20,6 @@ const ImageTextInput: React.FC<Props> = (Props) => {
 
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <ImageIcon 
-        source={Props.source}
-        focus={focus}
-      />
 
       <Input
         label={Props.label}
@@ -38,13 +34,19 @@ const ImageTextInput: React.FC<Props> = (Props) => {
         secureTextEntry={Props.secureTextEntry}
         theme={{ 
           colors: { 
-            text: configTheme.textInputText, 
+            text: configTheme.primary, 
             primary: configTheme.textSecondary, 
             placeholder: configTheme.textInputTitle,
             error: configTheme.error
           },
         }}
+      >
+              <ImageIcon 
+        source={Props.source}
+        focus={focus}
       />
+
+      </Input>
     </View> 
   );
 }

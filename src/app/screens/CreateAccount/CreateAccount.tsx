@@ -5,8 +5,20 @@ import useStyles from './styles';
 import { Props } from '@navigation/stack.navigation';
 import { Header, Card, ImageTextInput } from '@components/index';
 import { headerStyle } from '@components/Header/Header';
-import { tittleTxt, descriptionHeaderTxt, descriptionBottomTxt, firstNameTxt, lastNameTxt, emailTxt, passwordTxt } from '@assets/Texts/CreateAccount';
+import { Button } from 'react-native-paper';
+import { 
+  tittleTxt, 
+  descriptionHeaderTxt, 
+  descriptionBottomTxt, 
+  firstNameTxt, 
+  lastNameTxt, 
+  emailTxt, 
+  passwordTxt,
+  termsTxt,
+  buttonTxt
+ } from '@assets/Texts/CreateAccount';
 import { mailRegEx } from './Createaccount.test';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Error {
   firstName: boolean;
@@ -78,50 +90,65 @@ const CreateAccount: React.FC<Props> = () => {
 }
 
   return (
-    <View style={styles.container}>
-
+    <SafeAreaView style={styles.container} edges={['bottom']}>
       <Header 
         title={tittleTxt} 
         description={descriptionHeaderTxt} 
         headerStyle={headerStyle.blue}
       />
 
-      <Card>
-        <ImageTextInput 
-          source={personIcon}
-          label={firstNameTxt} 
-          value={firstName}
-          onChangeText={(value) => onChangeFirstName(value)}
-          error={inputError.firstName}
-        />
-        <ImageTextInput 
-          source={personIcon}
-          label={lastNameTxt} 
-          value={lastName}
-          onChangeText={(value) => onChangeLastName(value)}
-          error={inputError.lastName}
-        />
-        <ImageTextInput 
-          source={personIcon}
-          label={emailTxt} 
-          value={email}
-          onChangeText={(value) => onChangeEmail(value)}
-          error={inputError.email}
-          keyboardType={'email-address'}
-        />
-        <ImageTextInput 
-          source={personIcon}
-          label={passwordTxt} 
-          value={password}
-          onChangeText={(value) => onChangePassword(value)}
-          error={inputError.password}
-          secureTextEntry={true}
-        />
+      <View style={{ flex: 1, justifyContent: 'space-between' }}>
+        <View style={{ padding: 30 }}>
+          <ImageTextInput 
+            source={personIcon}
+            label={firstNameTxt} 
+            value={firstName}
+            onChangeText={(value) => onChangeFirstName(value)}
+            error={inputError.firstName}
+          />
+          <ImageTextInput 
+            source={personIcon}
+            label={lastNameTxt} 
+            value={lastName}
+            onChangeText={(value) => onChangeLastName(value)}
+            error={inputError.lastName}
+          />
+          <ImageTextInput 
+            source={emailIcon}
+            label={emailTxt} 
+            value={email}
+            onChangeText={(value) => onChangeEmail(value)}
+            error={inputError.email}
+            keyboardType={'email-address'}
+          />
+          <ImageTextInput 
+            source={passwordIcon}
+            label={passwordTxt} 
+            value={password}
+            onChangeText={(value) => onChangePassword(value)}
+            error={inputError.password}
+            secureTextEntry={true}
+          />
+        </View>
+        <View>
+          <Text style={styles.description}>
+            {descriptionBottomTxt}
+            <Text style={{ ...styles.description, color: configTheme.primary}}>
+              {termsTxt}
+            </Text>
+          </Text> 
 
-   
-      </Card>
-    </View>
+          <Button 
+            mode="contained" 
+            onPress={() => console.log('Pressed')} 
+            style={styles.button}
+          >
+            {buttonTxt}
+          </Button>
+        </View>
 
+      </View>
+    </SafeAreaView>
 
 
 );
