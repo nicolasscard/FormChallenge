@@ -5,7 +5,10 @@ export default (props: ConfigEntity) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: props.backgroundScreens
+      // backgroundColor: props.backgroundScreens,
+      backgroundColor: 'red',
+      // justifyContent: 'center',
+      // alignItems: 'flex-start'
     }
   })
 }

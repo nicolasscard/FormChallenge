@@ -5,7 +5,7 @@ import { RouteProp } from '@react-navigation/native';
 
 import CreateAccount from '@screens/CreateAccount/CreateAccount';
 
-enableScreens();
+// enableScreens();
 
 /**
  * Specifying undefined means that the route doesn't have params. 

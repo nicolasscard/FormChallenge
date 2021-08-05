@@ -20,12 +20,12 @@ interface Props {
 const Header: React.FC<Props> = (Props) => {
   const { configTheme } = useConfigTheme();
   const styles = useStyles(configTheme);
+  const isBlue = Props.headerStyle == headerStyle.blue;
 
 
   const statusBar = () => {
-    const grandientColor = Props.headerStyle == headerStyle.blue 
-      ? configTheme.gradientBlue 
-      : configTheme.gradientViolet;
+    const grandientColor = isBlue ? configTheme.gradientBlue : configTheme.gradientViolet;
+
     return (
       <LinearGradient 
         start={{x: 0, y: 0}} end={{x: 1, y: 0}}
@@ -58,17 +58,17 @@ const Header: React.FC<Props> = (Props) => {
   }
 
   return (
-    <View style={{ flex: 1}}>
+    <View style={{ height: Props.description ? '23%': '12%',  backgroundColor: 'blue' }}>
       {statusBar()}
 
-      {Props.headerStyle == headerStyle.blue
+      {isBlue
         ? <ImageBackground 
             source={backgroundImg2x}
-            style={{ flex: 1, height: Props.description ? '18%' : '8%' }}
+            style={{ flex: 1 }}
           >
             <View style={{
-              height: Props.description ? '18%' : '8%',     
-               justifyContent: 'space-evenly',
+              flex: 1,
+              justifyContent: Props.description ? 'space-evenly' : 'flex-start',
             }}>
               {headerChilds()}
             </View>
@@ -76,9 +76,9 @@ const Header: React.FC<Props> = (Props) => {
         : <LinearGradient 
             start={{x: 0, y: 0}} end={{x: 1, y: 0}}
             colors={configTheme.gradientViolet}  
-            style={{ height: '8%' }}
+            style={{ flex: 1 }}
           >
-             <View style={{ flex: 1, justifyContent: 'center' }}>
+             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
               {headerChilds()}
             </View>
           </LinearGradient >

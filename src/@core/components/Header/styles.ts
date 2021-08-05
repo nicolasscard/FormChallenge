@@ -5,7 +5,7 @@ import { ConfigEntity } from '@hooks/useConfigTheme';
 export const useStyles = (props: ConfigEntity) => {
   return StyleSheet.create({
     statusBar: {
-      height: Platform.OS === 'ios' ? '5%' : StatusBar.currentHeight
+      height: Platform.OS === 'ios' ? 60 : StatusBar.currentHeight
     },    
     title: {
       color: props.textLight,

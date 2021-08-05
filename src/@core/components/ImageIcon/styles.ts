@@ -7,7 +7,11 @@ export default (props: ConfigEntity) => {
     container: {
       flex: 1,
       backgroundColor: props.backgroundScreens,
-      padding: 30
+    },
+    image: {
+      width: 20, 
+      height: 20, 
+      marginRight: 5,
     }
   })
 };

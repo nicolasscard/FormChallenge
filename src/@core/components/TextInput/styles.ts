@@ -4,9 +4,10 @@ import { ConfigEntity } from '@hooks/useConfigTheme';
 
 export default (props: ConfigEntity) => {
   return StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: props.backgroundScreens,
+    textInput: {
+      flex: 1, 
+        backgroundColor: 'transparent', 
+        fontWeight: 'bold',
     }
   })
 };

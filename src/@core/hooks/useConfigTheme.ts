@@ -17,6 +17,7 @@ export interface ConfigEntity {
   textInputTitle: string;
   textInputText: string;
   card: string;
+  error: string;
   /* fontLight: string;
   fontRegular: string;
   fontBold: string; */
@@ -39,17 +40,18 @@ export default () => {
     secondary: '#F25FBB',
     gradientBlue: ["#00DCEC","#00B7D5"],
     gradientViolet: ["#8D24C4","#500F71"],
-    backgroundScreens: '#f2f2f4',
+    backgroundScreens: '#FFFFFF',
     backgroundHeaders: '#202020',
     textLight: 'white',
     textDark: 'black',
-    textPrimary: '#000000',
-    textSecondary: '#B9B9BB',
+    textPrimary: '#17BFDD',
+    textSecondary: '#9C9C9C',
     textButtonPrimary: 'white',
     textButtonSecondary: '#7000AD',
-    textInputTitle: '#B9B9BB',
-    textInputText: 'black',
+    textInputTitle: '#D8D8D8',
+    textInputText: '#17BFDD',
     card: 'white',
+    error: '#FF0000',
     /* fontLight: Platform.OS === 'ios' ? 'SonnyGothic-UltraLight' : 'W Foundry - Sonny Gothic Ultra Light',
     fontRegular: Platform.OS === 'ios' ? 'SonnyGothic-Regular' : 'W Foundry - Sonny Gothic Regular',
     fontBold: Platform.OS === 'ios' ? 'SonnyGothic-Bold' : 'W Foundry - Sonny Gothic Bold', */
