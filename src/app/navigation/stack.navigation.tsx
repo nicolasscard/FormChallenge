@@ -1,9 +1,10 @@
 import React from 'react';
+// import { Button} from 'react-native';
 import { enableScreens } from 'react-native-screens';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
-
-import CreateAccount from '@screens/CreateAccount/CreateAccount';
+import { Header, Card, ImageTextInput } from '@components/index';
+import { CreateAccount, Terms, LinkYourBank } from '@screens/index';
 
 // enableScreens();
 
@@ -13,6 +14,8 @@ import CreateAccount from '@screens/CreateAccount/CreateAccount';
  */
  type RootStackParamList = {
   CreateAccount: undefined
+  Terms: undefined
+  LinkYourBank: undefined
 };
 
 // Creatte a generic Props for all screen
@@ -24,15 +27,34 @@ export type Props = {
   route: RouteProp<RootStackParamList, typeof screenName>;
 };
 
-function StackNavigation() {
+function StackNavigation(props: Props) {
   return (
     <Stack.Navigator
       initialRouteName="CreateAccount"
-      screenOptions={{
+      screenOptions={({ navigation, route }) => ({
         headerShown: false
-      }}
+        // headerTitle: props => 'Titulo Header',
+     
+        // header: () => (
+        //   <Header 
+        //   title={tittleTxt} 
+        //   description={descriptionHeaderTxt} 
+        //   headerStyle={headerStyle.blue}
+        // />
+        // ),
+        // headerLeft: () => (
+        //   <Button
+        //     color='red'
+        //     onPress={() => navigation.goBack()}
+        //   >
+        //     Back
+        //   </Button>
+        // ),
+      })}
     >
       <Stack.Screen name="CreateAccount" component={CreateAccount} />     
+      <Stack.Screen name="Terms" component={Terms} />     
+      <Stack.Screen name="LinkYourBank" component={LinkYourBank} />     
 
     </Stack.Navigator>
   );

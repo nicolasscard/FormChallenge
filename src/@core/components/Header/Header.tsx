@@ -1,15 +1,22 @@
 import React from 'react';
-import { View, Text, ImageSourcePropType, ImageBackground, StatusBar } from 'react-native';
+import { View, Text, ImageSourcePropType, ImageBackground, StatusBar, Platform } from 'react-native';
 import useConfigTheme from '@hooks/useConfigTheme';
 import {useStyles} from './styles';
 import LinearGradient from 'react-native-linear-gradient';
+import { Button } from 'react-native-paper';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import screenName from '@navigation/stack.navigation';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 const backgroundImg: ImageSourcePropType = require("@assets/media/background.png");
 const backgroundImg2x: ImageSourcePropType = require("@assets/media/background2x.png");
 
 interface Props {
   title?: String,
   description?: String,
-  headerStyle: headerStyle
+  headerStyle: headerStyle,
+  leaderLeft?: React.ReactNode,
+  navigation?: any
  }
 
  export enum headerStyle {
@@ -21,7 +28,7 @@ const Header: React.FC<Props> = (Props) => {
   const { configTheme } = useConfigTheme();
   const styles = useStyles(configTheme);
   const isBlue = Props.headerStyle == headerStyle.blue;
-
+  const height = isBlue ? (Platform.OS == 'ios' ? 170 : 150) : (Platform.OS == 'ios' ? 95 : 75);
 
   const statusBar = () => {
     const grandientColor = isBlue ? configTheme.gradientBlue : configTheme.gradientViolet;
@@ -43,22 +50,46 @@ const Header: React.FC<Props> = (Props) => {
 
   const headerChilds = () => {
     return (
-      <>
-        <Text style={styles.title}>
-          {Props.title}
-        </Text>
-        
-        {Props.description &&
-          <Text style={styles.description}>
-            {Props.description}
+      <View style={{ flexDirection: 'row', paddingTop: Platform.OS == 'android' ? 5 : 0 }}>
+        <View style={{ flex: 0.1, width: 25, height: 25,  
+          // alignItems: 'center', 
+          justifyContent: 'center' 
+          }}>
+
+            {Props.navigation &&
+            <Button 
+                // mode="text" 
+                onPress={() => Props.navigation.goBack()} 
+                style={{ alignItems: 'center', justifyContent: 'center',  }}
+                // contentStyle={styles.button}
+                // labelStyle={{ fontSize: 12 }}
+                loading={false}
+                disabled={false}
+                icon={() => <Icon name="arrow-back-ios" size={20} color="white" />}
+              >
+              </Button>
+
+            }
+           
+        </View>
+        <View style={{  flex: 0.8, }}>
+          <Text style={styles.title}>
+            {Props.title}
           </Text>
-        }
-      </>
+          
+          {Props.description &&
+            <Text style={styles.description}>
+              {Props.description}
+            </Text>
+          }
+        </View>
+      </View>
     );
   }
-
+  
+  
   return (
-    <View style={{ height: Props.description ? '23%': '12%',  backgroundColor: 'blue' }}>
+    <View style={{ height: height  }}> 
       {statusBar()}
 
       {isBlue
@@ -68,7 +99,9 @@ const Header: React.FC<Props> = (Props) => {
           >
             <View style={{
               flex: 1,
-              justifyContent: Props.description ? 'space-evenly' : 'flex-start',
+              justifyContent: 'flex-start',
+              paddingTop: 15
+              // paddingTop: Platform.OS == 'android' ? 20 : 0
             }}>
               {headerChilds()}
             </View>
@@ -78,10 +111,10 @@ const Header: React.FC<Props> = (Props) => {
             colors={configTheme.gradientViolet}  
             style={{ flex: 1 }}
           >
-             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
               {headerChilds()}
             </View>
-          </LinearGradient >
+          </LinearGradient>
       }
     </View>
   )

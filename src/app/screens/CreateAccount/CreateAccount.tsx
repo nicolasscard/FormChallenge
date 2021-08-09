@@ -7,8 +7,8 @@ import { Header, Card, ImageTextInput } from '@components/index';
 import { headerStyle } from '@components/Header/Header';
 import { Button } from 'react-native-paper';
 import { 
-  tittleTxt, 
-  descriptionHeaderTxt, 
+  headerTittleTxt, 
+  headerDescriptionTxt, 
   descriptionBottomTxt, 
   firstNameTxt, 
   lastNameTxt, 
@@ -27,7 +27,15 @@ interface Error {
   password: boolean;
 }
 
-const CreateAccount: React.FC<Props> = () => {
+type User = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+
+const CreateAccount: React.FC<Props> = ({ navigation, route }) => {
   const { configTheme } = useConfigTheme();
   const styles = useStyles(configTheme);
   
@@ -35,10 +43,12 @@ const CreateAccount: React.FC<Props> = () => {
   const emailIcon: ImageSourcePropType = require("@assets/media/emailIcon.png");
   const passwordIcon: ImageSourcePropType = require("@assets/media/passwordIcon.png");
 
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [user, setUser] = useState<User>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
 
   const [inputError, setInputError] = useState<Error>({
     firstName: false,
@@ -47,42 +57,60 @@ const CreateAccount: React.FC<Props> = () => {
     password: false,
   });
 
+  const [diabledButton, setDisabledButton] = useState<boolean>(true);
 
-  const onChangeFirstName = (value: string) => {
+
+  const onChangeFirstName = (value: string, error?: boolean) => {
+    let newUser = user;
+    newUser.firstName = value;
     if (value.length == 0) {
       setInputError({...inputError, firstName: true });
+      setDisabledButton(true);
     }
     else {
       setInputError({...inputError, firstName: false });
+      setDisabledButton(false);
     }
-    setFirstName(value);
+    setUser(newUser);
   };
   const onChangeLastName = (value: string) => {
+    let newUser = user;
+    newUser.lastName = value;
     if (value.length == 0) {
       setInputError({...inputError, lastName: true });
+      setDisabledButton(true);
     }
     else {
       setInputError({...inputError, lastName: false });
+      setDisabledButton(false);
     }
-    setLastName(value);
+    setUser(newUser);
   };
   const onChangeEmail = (value: string) => {
+    let newUser = user;
+    newUser.email = value;
     if (value.length == 0 || !validateEmail(value)) {
       setInputError({...inputError, email: true });
+      setDisabledButton(true);
     }
     else { 
       setInputError({...inputError, email: false });
+      setDisabledButton(false);
     }
-    setEmail(value);
+    setUser(newUser);
   };
   const onChangePassword = (value: string) => {
+    let newUser = user;
+    newUser.password = value;
     if (value.length < 4) {
       setInputError({...inputError, password: true });
+      setDisabledButton(true);
     }
     else {
       setInputError({...inputError, password: false });
+      setDisabledButton(false);
     }
-    setPassword(value);
+    setUser(newUser);
   };
 
   const validateEmail = (email: string) => {
@@ -92,9 +120,9 @@ const CreateAccount: React.FC<Props> = () => {
   return (
     <SafeAreaView style={styles.container} edges={['bottom']}>
       <Header 
-        title={tittleTxt} 
-        description={descriptionHeaderTxt} 
-        headerStyle={headerStyle.blue}
+       title={headerTittleTxt} 
+       description={headerDescriptionTxt} 
+       headerStyle={headerStyle.blue}
       />
 
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -102,21 +130,21 @@ const CreateAccount: React.FC<Props> = () => {
           <ImageTextInput 
             source={personIcon}
             label={firstNameTxt} 
-            value={firstName}
+            value={user.firstName}
             onChangeText={(value) => onChangeFirstName(value)}
             error={inputError.firstName}
           />
           <ImageTextInput 
             source={personIcon}
             label={lastNameTxt} 
-            value={lastName}
+            value={user.lastName}
             onChangeText={(value) => onChangeLastName(value)}
             error={inputError.lastName}
           />
           <ImageTextInput 
             source={emailIcon}
             label={emailTxt} 
-            value={email}
+            value={user.email}
             onChangeText={(value) => onChangeEmail(value)}
             error={inputError.email}
             keyboardType={'email-address'}
@@ -124,24 +152,29 @@ const CreateAccount: React.FC<Props> = () => {
           <ImageTextInput 
             source={passwordIcon}
             label={passwordTxt} 
-            value={password}
+            value={user.password}
             onChangeText={(value) => onChangePassword(value)}
             error={inputError.password}
             secureTextEntry={true}
           />
         </View>
-        <View>
+        <View style={styles.bottomView}>
           <Text style={styles.description}>
             {descriptionBottomTxt}
-            <Text style={{ ...styles.description, color: configTheme.primary}}>
+            <Text
+              onPress={() => navigation.navigate('Terms')} 
+              style={{ ...styles.description, color: configTheme.primary}}>
               {termsTxt}
             </Text>
           </Text> 
 
           <Button 
             mode="contained" 
-            onPress={() => console.log('Pressed')} 
+            onPress={() => navigation.navigate('LinkYourBank')} 
             style={styles.button}
+            labelStyle={{ fontSize: 12 }}
+            loading={false}
+            disabled={diabledButton}
           >
             {buttonTxt}
           </Button>
@@ -149,10 +182,7 @@ const CreateAccount: React.FC<Props> = () => {
 
       </View>
     </SafeAreaView>
-
-
-);
-
+  );
 }
 
 export default CreateAccount;

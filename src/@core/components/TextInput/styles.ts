@@ -8,6 +8,13 @@ export default (props: ConfigEntity) => {
       flex: 1, 
         backgroundColor: 'transparent', 
         fontWeight: 'bold',
+    },
+    image: {
+      resizeMode: 'contain',
+      width: 20, 
+      height: 20,
+      // backgroundColor: 'red' 
+      marginRight: 5,
     }
   })
 };

@@ -6,16 +6,19 @@ export default (props: ConfigEntity) => {
     container: {
       flex: 1,
       backgroundColor: props.backgroundScreens,
-      // backgroundColor: 'red',
-      // justifyContent: 'center',
-      // alignItems: 'flex-start'
     },
-    description: {
-      paddingHorizontal: 20,
-      color: props.textSecondary,
-      fontSize: 12,
-      textAlign: 'center',
-      // lineHeight: 23.44
+    bodyView: {
+      flex: 1,
+      paddingHorizontal: 10, 
+      alignItems: 'center'
+    },
+    descriptionText: {
+      padding: 30,
+      fontSize: 14,
+    },
+    image: {
+      resizeMode: 'contain',
+      width: '100%', 
     },
     button: {
       height: 50, 
@@ -24,11 +27,5 @@ export default (props: ConfigEntity) => {
       justifyContent: 'center',
       backgroundColor: props.primaryButton
     },
-    bottomView: {
-      paddingHorizontal: 10, 
-      // backgroundColor: 'yellow', 
-      justifyContent: 'space-between', 
-      alignItems: 'center'
-    }
   })
 }

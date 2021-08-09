@@ -12,7 +12,6 @@ export default (props: ConfigEntity) => {
       resizeMode: 'contain',
       width: 20, 
       height: 20,
-      // backgroundColor: 'red' 
       marginRight: 5,
     }
   })
