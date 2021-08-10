@@ -3,13 +3,17 @@ import { View, ImageSourcePropType, TextInputProps, Image } from 'react-native';
 import { TextInput as Input } from 'react-native-paper';
 import useConfigTheme from '@hooks/useConfigTheme';
 import useStyles from './styles';
+import { Field, reduxForm, InjectedFormProps, DecoratedFormProps } from 'redux-form';
 
 interface Props extends TextInputProps { 
+  input: Field,
   source: ImageSourcePropType,
-  label: string,
-  value?: string,
-  onChangeText: (value: string) => void,
+  name?: string,
+  label?: string,
+  value: string,
+  // onChangeText?: (value: string) => void,
   error?: boolean,
+  touched?: boolean,
 }
 
 const ImageTextInput: React.FC<Props> = (Props) => {
@@ -18,8 +22,12 @@ const ImageTextInput: React.FC<Props> = (Props) => {
   const [focus, setFocus] = useState<boolean>(false);
 
   const onChangeText = (value: string) => {
-    Props.onChangeText(value);
+    // Props.onChangeText(value);
   }
+
+
+  // console.log('error input');
+  // console.log(Props.error);
 
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -27,17 +35,19 @@ const ImageTextInput: React.FC<Props> = (Props) => {
         source={Props.source}
         style={{ 
           ...styles.image, 
-          tintColor: Props.error ? configTheme.error : focus ? configTheme.textSecondary : configTheme.textInputTitle 
+          tintColor: Props.error && Props.touched ? configTheme.error : focus ? configTheme.textSecondary : configTheme.textInputTitle 
         }}
       />
 
       <Input
+        {...Props.input} 
         label={Props.label}
         value={Props.value}
-        onChangeText={onChangeText}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-        error={Props.error}
+        // value={Props.value}
+        onChangeText={Props.onChangeText}
+        // onFocus={() => setFocus(true)}
+        // onBlur={() => setFocus(false)}
+        error={Props.error && Props.touched}
         autoCapitalize={'none'}
         style={styles.textInput}
         keyboardType={Props.keyboardType}

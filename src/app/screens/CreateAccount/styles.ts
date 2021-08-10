@@ -6,16 +6,12 @@ export default (props: ConfigEntity) => {
     container: {
       flex: 1,
       backgroundColor: props.backgroundScreens,
-      // backgroundColor: 'red',
-      // justifyContent: 'center',
-      // alignItems: 'flex-start'
     },
     description: {
       paddingHorizontal: 20,
       color: props.textSecondary,
       fontSize: 12,
       textAlign: 'center',
-      // lineHeight: 23.44
     },
     button: {
       height: 50, 
@@ -26,9 +22,14 @@ export default (props: ConfigEntity) => {
     },
     bottomView: {
       paddingHorizontal: 10, 
-      // backgroundColor: 'yellow', 
       justifyContent: 'space-between', 
       alignItems: 'center'
-    }
+    },
+    errorText: {
+      fontSize: 12,
+      marginLeft: 30,
+      marginTop: 5,
+      color: props.error
+    },
   })
 }
