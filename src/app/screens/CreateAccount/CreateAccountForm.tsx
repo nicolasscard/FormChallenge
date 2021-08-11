@@ -1,36 +1,29 @@
 import React from 'react';
-import { Text, View, ImageSourcePropType } from 'react-native';
+import { Text, View, ImageSourcePropType} from 'react-native';
 import { Field, reduxForm, InjectedFormProps, } from 'redux-form';
-import useConfigTheme from '@hooks/useConfigTheme';
-import { ImageTextInput } from '@components/index';
-import useStyles from './styles';
-import { 
-  firstNameTxt, 
-  lastNameTxt, 
-  emailTxt, 
-  passwordTxt,
- } from '@assets/Texts/CreateAccount';
+import { account } from './AccountSlice';
 
-type Error = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
+import useConfigTheme from '@hooks/useConfigTheme';
+import useStyles from './styles';
+
+import { ImageTextInput } from '@components/index';
+import { firstNameTxt, lastNameTxt, emailTxt, passwordTxt } from '@assets/Texts/CreateAccount';
+import { ScrollView } from 'react-native-gesture-handler';
 
 type Props = {
   input: Field,
   placeholder: string,
   meta: { touched: boolean, error: string, warning: string },
   source: ImageSourcePropType,
+  secureTextEntry: boolean
 }
 
 const personIcon: ImageSourcePropType = require("@assets/media/person2x.png");
   const emailIcon: ImageSourcePropType = require("@assets/media/emailIcon.png");
   const passwordIcon: ImageSourcePropType = require("@assets/media/passwordIcon.png");
 
- const validate = (values: any) => {
-  let errors: Error = {firstName: '', lastName: '', email: '', password: '' };
+ const validate = (values: account) => {
+  let errors: account = {firstName: '', lastName: '', email: '', password: '' };
   if (!values.firstName) {
     errors.firstName = 'Required';
   } 
@@ -58,7 +51,7 @@ const warn = (values: {}) => {
 const renderField: React.FC<Props> = (Props) => {
   const { configTheme } = useConfigTheme();
   const styles = useStyles(configTheme);
-  const { source, input, placeholder, meta: { touched, error, warning } } = Props;
+  const { source, input, placeholder, secureTextEntry, meta: { touched, error, warning } } = Props;
 
   return (
     <View>
@@ -69,6 +62,7 @@ const renderField: React.FC<Props> = (Props) => {
         label={placeholder} 
         error={(error != '' && error != undefined)}
         touched={touched}
+        secureTextEntry={secureTextEntry}
       />
 
       { touched && (
@@ -82,7 +76,7 @@ const renderField: React.FC<Props> = (Props) => {
 
 const CreateAccountForm: React.FC<InjectedFormProps> = (Props) => {
     return (
-      <View>
+      <ScrollView style={{  flex: 1 }}>
         <Field
           name='firstName'
           label='firstName'
@@ -114,8 +108,9 @@ const CreateAccountForm: React.FC<InjectedFormProps> = (Props) => {
           component={renderField}
           placeholder={passwordTxt}
           source={passwordIcon}
+          secureTextEntry={true}
         />       
-      </View>
+      </ScrollView>
     )
 }
 

@@ -32,7 +32,6 @@ export default (props: ConfigEntity) => {
       width: '90%', 
       marginVertical: 20,
       justifyContent: 'center',
-      // alignItems: 'center',
       alignSelf: 'center',
       backgroundColor: props.primaryButton
     },

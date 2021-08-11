@@ -1,15 +1,12 @@
-import React, { useLayoutEffect, useEffect } from 'react';
+import React from 'react';
 import { View, ImageSourcePropType, Text, Image} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '@components/index';
-import useConfigTheme from '@hooks/useConfigTheme';
 import { headerStyle } from '@components/Header/Header';
+import useConfigTheme from '@hooks/useConfigTheme';
 import useStyles from './styles';
 import { headerTittleTxt, descriptionBodyTxt } from '@assets/Texts/Terms';
-import { Button } from 'react-native-paper';
-
 import { Props } from '@navigation/stack.navigation';
-import { props } from 'ramda';
 
 const illustrationMoney: ImageSourcePropType = require("@assets/media/illustrationMoney.png");
 const flyingMoney: ImageSourcePropType = require("@assets/media/flyingMoney.png");

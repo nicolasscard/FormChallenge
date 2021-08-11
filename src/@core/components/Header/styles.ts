@@ -13,12 +13,23 @@ export const useStyles = (props: ConfigEntity) => {
       fontWeight: 'bold',
       textAlign: 'center',
     },
-    description: {
+    descriptionText: {
       paddingHorizontal: 10,
       paddingTop: 15,
       color: props.textLight,
       fontSize: 14,
       textAlign: 'center',
     },
+    view : {
+      flex: 0.1, 
+      width: 25, 
+      height: 25, 
+      justifyContent: 'center'
+    },
+    imageBackgroundView: {
+      flex: 1,
+      justifyContent: 'flex-start',
+      paddingTop: 15
+    }
   })
 };

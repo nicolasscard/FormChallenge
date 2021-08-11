@@ -4,11 +4,8 @@ import useConfigTheme from '@hooks/useConfigTheme';
 import {useStyles} from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from 'react-native-paper';
-import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import screenName from '@navigation/stack.navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const backgroundImg: ImageSourcePropType = require("@assets/media/background.png");
 const backgroundImg2x: ImageSourcePropType = require("@assets/media/background2x.png");
 
 interface Props {
@@ -51,34 +48,23 @@ const Header: React.FC<Props> = (Props) => {
   const headerChilds = () => {
     return (
       <View style={{ flexDirection: 'row', paddingTop: Platform.OS == 'android' ? 5 : 0 }}>
-        <View style={{ flex: 0.1, width: 25, height: 25,  
-          // alignItems: 'center', 
-          justifyContent: 'center' 
-          }}>
-
+        <View style={styles.view}>
             {Props.navigation &&
-            <Button 
-                // mode="text" 
+              <Button 
                 onPress={() => Props.navigation.goBack()} 
                 style={{ alignItems: 'center', justifyContent: 'center',  }}
-                // contentStyle={styles.button}
-                // labelStyle={{ fontSize: 12 }}
                 loading={false}
                 disabled={false}
                 icon={() => <Icon name="arrow-back-ios" size={20} color="white" />}
-              >
-              </Button>
-
+                >
+                </Button>
             }
-           
         </View>
         <View style={{  flex: 0.8, }}>
-          <Text style={styles.title}>
-            {Props.title}
-          </Text>
+          <Text style={styles.title}> {Props.title} </Text>
           
           {Props.description &&
-            <Text style={styles.description}>
+            <Text style={styles.descriptionText}>
               {Props.description}
             </Text>
           }
@@ -97,12 +83,7 @@ const Header: React.FC<Props> = (Props) => {
             source={backgroundImg2x}
             style={{ flex: 1 }}
           >
-            <View style={{
-              flex: 1,
-              justifyContent: 'flex-start',
-              paddingTop: 15
-              // paddingTop: Platform.OS == 'android' ? 20 : 0
-            }}>
+            <View style={styles.imageBackgroundView}>
               {headerChilds()}
             </View>
           </ImageBackground>
@@ -117,7 +98,7 @@ const Header: React.FC<Props> = (Props) => {
           </LinearGradient>
       }
     </View>
-  )
+  );
 }
 
 export default Header;

@@ -1,10 +1,8 @@
-import React, { Children } from 'react';
-import { Text, View } from 'react-native';
+import React from 'react';
+import {  View } from 'react-native';
 
 import useConfigTheme from '@hooks/useConfigTheme';
-
 import useStyles from './styles';
-import { props } from 'ramda';
 
 interface Props { 
 

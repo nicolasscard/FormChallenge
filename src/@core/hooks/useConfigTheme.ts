@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Platform, useColorScheme } from 'react-native';
+import { useColorScheme } from 'react-native';
 
 export interface ConfigEntity {
   primary: string;
@@ -19,9 +19,6 @@ export interface ConfigEntity {
   card: string;
   error: string;
   primaryButton: string;
-  /* fontLight: string;
-  fontRegular: string;
-  fontBold: string; */
   alingContentCenter?: Alings;
   alingContentBetweenRow: Alings;
 }
@@ -54,9 +51,6 @@ export default () => {
     card: 'white',
     error: '#FF0000',
     primaryButton: '#5FBA20',
-    /* fontLight: Platform.OS === 'ios' ? 'SonnyGothic-UltraLight' : 'W Foundry - Sonny Gothic Ultra Light',
-    fontRegular: Platform.OS === 'ios' ? 'SonnyGothic-Regular' : 'W Foundry - Sonny Gothic Regular',
-    fontBold: Platform.OS === 'ios' ? 'SonnyGothic-Bold' : 'W Foundry - Sonny Gothic Bold', */
     alingContentCenter: {
       justifyContent: 'center',
       alignItems: 'center',

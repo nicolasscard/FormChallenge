@@ -7,7 +7,7 @@ export default (props: ConfigEntity) => {
       flex: 1,
       backgroundColor: props.backgroundScreens,
     },
-    description: {
+    descriptionText: {
       paddingHorizontal: 20,
       color: props.textSecondary,
       fontSize: 12,
@@ -31,5 +31,12 @@ export default (props: ConfigEntity) => {
       marginTop: 5,
       color: props.error
     },
+    loader: {
+      position: 'absolute', 
+      width: '100%', 
+      height: '100%', 
+      alignItems: 'center', 
+      justifyContent: 'center' 
+    }
   })
 }

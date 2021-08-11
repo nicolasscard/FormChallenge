@@ -1,11 +1,22 @@
-import React, {  } from 'react';
-import { View, Text, } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, ActivityIndicator} from 'react-native';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@core/Redux/store';
+import { asyncSaveAccount } from './AccountSlice';
+
 import useConfigTheme from '@hooks/useConfigTheme';
 import useStyles from './styles';
+
 import { Props } from '@navigation/stack.navigation';
+
 import { Header, } from '@components/index';
 import { headerStyle } from '@components/Header/Header';
+
 import { Button } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { submit, isInvalid, isSubmitting } from 'redux-form';
+
 import { 
   headerTittleTxt, 
   headerDescriptionTxt, 
@@ -13,38 +24,35 @@ import {
   termsTxt,
   buttonTxt
  } from '@assets/Texts/CreateAccount';
- import { useDispatch, useSelector } from 'react-redux';
 
-import { mailRegEx } from './CreateAccount.test';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { submit, isInvalid, isSubmitting } from 'redux-form';
 import CreateAccountForm from './CreateAccountForm';
 
-
-export type User = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-
 const CreateAccount: React.FC<Props> = ({ navigation, route }) => {
-
+  //get redux values
+  const loading = useSelector((state: RootState) => state.account.loading);
+  const error = useSelector((state: RootState) => state.account.error);
+  const account = useSelector((state: RootState) => state.account.account);
+  const dispatch = useDispatch();
+  
+  useEffect(() => { 
+    if (!loading && error == undefined &&
+      account.email != '' && account.firstName != '' && account.lastName != '' && account.password != '' 
+      ) {
+      navigation.navigate('LinkYourBank');
+    }
+  }, [error, loading, account]);
+  
+  //get theme values
   const { configTheme } = useConfigTheme();
   const styles = useStyles(configTheme);
   
-  const dispatch = useDispatch();
-  const isInvalidd = useSelector((state) => 
-    isInvalid('Form')(state)
-  )
+  // get validators and submitting states from form
+  const isInvalidd = useSelector((state) => isInvalid('Form')(state));
+  const isSubmittingg = useSelector((state) => isSubmitting('Form')(state));
 
-  const isSubmittingg = useSelector((state) => 
-  isSubmitting('Form')(state)
-)
-
-  const validateEmail = (email: string) => {
-    return mailRegEx.test(String(email).toLowerCase());
-}
+  const onSubmit = async (values: any) => {
+    await dispatch(asyncSaveAccount(values));
+  };
 
   return (
     <SafeAreaView style={styles.container} edges={['bottom']}>
@@ -54,26 +62,15 @@ const CreateAccount: React.FC<Props> = ({ navigation, route }) => {
        headerStyle={headerStyle.blue}
       />
 
-       <View style={{ flex: 1, justifyContent: 'space-between' }}>
-        <View style={{ padding: 30 }}>
-        
-          <CreateAccountForm onSubmit={
-            (values: any, state: any) => {
-              console.log('onSubmit')
-              console.log(values)
-              
-                 // navigation.navigate('LinkYourBank')
-            }
-          } 
-            />
+       <View style={{ padding: 25, flex: 1, justifyContent: 'space-between' }}>
+        <CreateAccountForm onSubmit={onSubmit} />
 
-        </View>
         <View style={styles.bottomView}>
-          <Text style={styles.description}>
+          <Text style={styles.descriptionText}>
             {descriptionBottomTxt}
             <Text
               onPress={() => navigation.navigate('Terms')} 
-              style={{ ...styles.description, color: configTheme.primary}}>
+              style={{ ...styles.descriptionText, color: configTheme.primary}}>
               {termsTxt}
             </Text>
           </Text> 
@@ -91,7 +88,13 @@ const CreateAccount: React.FC<Props> = ({ navigation, route }) => {
           </Button>
         </View>     
       </View> 
-
+      {loading &&
+        <ActivityIndicator 
+        size="large" 
+        color={configTheme.primary} 
+        style={styles.loader}
+        />
+      }
     </SafeAreaView>
   );
 }
